@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <!-- TOKcrew Wordmark — Variant 1: Glitch Energy -->
+  <!-- Transparent background, just the wordmark -->
+
+  <!-- Cyan glitch offset (behind, shifted up-left) -->
+  <text x="58" y="270" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="240" font-weight="900" fill="#25F4EE" opacity="0.35"
+        letter-spacing="-12">TOK</text>
+
+  <!-- Pink glitch offset (behind, shifted down-right) -->
+  <text x="72" y="284" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="240" font-weight="900" fill="#FE2C55" opacity="0.35"
+        letter-spacing="-12">TOK</text>
+
+  <!-- Main white TOK with pink stroke -->
+  <text x="65" y="277" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="240" font-weight="900" fill="#FFFFFF" stroke="#FE2C55"
+        stroke-width="3" letter-spacing="-12">TOK</text>
+
+  <!-- "crew" — lowercase, italic, cyan, playful -->
+  <text x="620" y="277" font-family="Arial, Helvetica, sans-serif"
+        font-size="140" font-weight="700" font-style="italic" fill="#25F4EE"
+        letter-spacing="-2">crew</text>
+
+  <!-- Dynamic slash accent between TOK and crew -->
+  <line x1="600" y1="140" x2="610" y2="290" stroke="#FE2C55" stroke-width="5" stroke-linecap="round"/>
+  <line x1="606" y1="140" x2="616" y2="290" stroke="#25F4EE" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Sparkle dots -->
+  <circle cx="540" cy="100" r="6" fill="#25F4EE"/>
+  <circle cx="560" cy="80" r="4" fill="#FE2C55"/>
+  <circle cx="900" cy="310" r="5" fill="#FE2C55"/>
+  <circle cx="920" cy="325" r="3" fill="#25F4EE"/>
+
+  <!-- Small TikTok note integrated on the T crossbar -->
+  <g transform="translate(80, 75) scale(0.8)">
+    <path d="M 0 0 L 0 35 Q 0 42 -6 44 Q -14 46 -18 38 Q -22 28 -14 20 Q -6 14 0 20 L 0 5 L 14 0 L 14 -5 L 0 -5 Z"
+          fill="#25F4EE"/>
+    <path d="M 3 3 L 3 38 Q 3 45 -3 47 Q -11 49 -15 41 Q -19 31 -11 23 Q -3 17 3 23 L 3 8 L 17 3 L 17 -2 L 3 -2 Z"
+          fill="#FE2C55" opacity="0.7"/>
+  </g>
+</svg>

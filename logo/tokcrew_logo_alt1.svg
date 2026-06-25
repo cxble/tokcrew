@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <!-- TOKcrew Wordmark — Variant 2: Bold Contrast -->
+  <!-- TOK in heavy black block style, crew in handwritten/scrawl style -->
+
+  <!-- TOK — solid black with cyan shadow -->
+  <text x="60" y="280" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="260" font-weight="900" fill="#FE2C55"
+        letter-spacing="-14">TOK</text>
+  <text x="56" y="276" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="260" font-weight="900" fill="#25F4EE"
+        letter-spacing="-14">TOK</text>
+  <text x="58" y="278" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="260" font-weight="900" fill="#000000"
+        letter-spacing="-14">TOK</text>
+
+  <!-- crew — white outline style, angled -->
+  <text x="610" y="278" font-family="Arial, Helvetica, sans-serif"
+        font-size="130" font-weight="900" font-style="italic" fill="none"
+        stroke="#000000" stroke-width="4" letter-spacing="-1">crew</text>
+  <text x="610" y="278" font-family="Arial, Helvetica, sans-serif"
+        font-size="130" font-weight="900" font-style="italic" fill="#FFFFFF"
+        letter-spacing="-1">crew</text>
+
+  <!-- Underline swoosh -->
+  <path d="M 50 330 Q 300 340 600 325 Q 800 315 1000 328" 
+        stroke="#FE2C55" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M 50 326 Q 300 336 600 321 Q 800 311 1000 324" 
+        stroke="#25F4EE" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Exclamation mark for energy -->
+  <text x="1030" y="270" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="200" font-weight="900" fill="#FE2C55">!</text>
+  <text x="1026" y="266" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="200" font-weight="900" fill="#25F4EE">!</text>
+  <text x="1028" y="268" font-family="Arial Black, Helvetica, sans-serif"
+        font-size="200" font-weight="900" fill="#000000">!</text>
+</svg>

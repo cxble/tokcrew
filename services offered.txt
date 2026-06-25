@@ -1,0 +1,52 @@
+Core Package — Conversion & Conversation Management
+The foundation: always-on response handling across comments and DMs, built to convert attention into sales.
+1. Comment Section Management
+•	Timely, on-brand replies to every comment
+•	Spam and troll filtering
+2. DM Chatbot Automation (FAQ)
+•	Auto-replies for common questions (pricing, shipping, availability)
+•	Always-on coverage outside business hours
+3. DM Human Takeover (LLM-Assisted Ticketing)
+•	AI flags complex or high-intent conversations for human handling
+•	Seamless handoff with full conversation context — no repeated questions
+4. TikTok Shop Comment-to-Purchase Funnel
+•	Product-tagged comment responses that drive viewers to checkout
+•	Affiliate/creator comment engagement support
+5. Live Selling Support
+•	Real-time comment monitoring during LIVE sessions
+•	Moderator bots for high-volume chat
+•	Automated “buy now” / restock prompts timed to the live
+6. Lead Qualification & CRM Handoff
+•	Hot / warm / cold lead scoring from DM conversations
+•	Auto-push to CRM, Google Sheet, or Excel tracker
+•	Funnel routing to landing page where applicable
+7. Sentiment & Complaint Monitoring
+•	Early flagging of negative sentiment spikes or PR risks
+•	Daily/weekly complaint summary so issues get caught before they escalate
+Add-On Package — Content Support
+Optional support to keep the content pipeline moving. Best framed as convenience, not a creative agency replacement.
+•	Content calendar planning & scheduled posting automation
+•	Basic editing & repurposing (long-form → TikTok-sized clips, cross-platform resizing)
+Marketing Add-On — Performance & Ads
+For clients ready to scale spend behind what's already converting.
+•	Performance dashboard — engagement, response time, DM-to-sale conversion, tracked weekly
+•	TikTok Ads / Spark Ads management — boosting proven organic content
+One-Time Setup Fee (recommended)
+Covers the upfront engineering work: chatbot configuration, CRM/dashboard integration, and live-selling bot setup. Charged once per client, separate from the monthly retainer — this protects the value of the technical build-out.
+Suggested Tiering
+A starting structure — adjust pricing once you've tested the market. The goal is to keep Core as the anchor retainer and use add-ons to increase deal size without diluting margin.
+Starter
+New / small TikTok accounts
+•	Comment management
+•	DM FAQ bot
+•	Human takeover ticketing	Growth
+Active TikTok Shop sellers
+•	Everything in Starter
+•	Comment-to-purchase funnel
+•	Lead qualification + CRM handoff
+•	Sentiment monitoring	Scale
+Live-selling / ads-ready brands
+•	Everything in Growth
+•	Live selling support
+•	Content add-on
+•	Marketing add-on (dashboard + ads)
