@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOKcrew — TikTok Business Operations Partner</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --cyan:#25F4EE;
+    --pink:#FE2C55;
+    --black:#0a0a0a;
+    --dark:#111;
+    --darker:#080808;
+    --card:#181818;
+    --white:#fff;
+    --gray:#999;
+    --graylt:#ccc;
+    --grayd:#333;
+  }
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--black);
+    color:var(--white);
+    max-width:480px;
+    margin:0 auto;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* --- UTILITIES --- */
+  .section{padding:48px 24px;position:relative;text-align:center;overflow:hidden}
+  .glow-cyan{background:radial-gradient(circle at 50% 50%,rgba(37,244,238,0.15),transparent 60%)}
+  .glow-pink{background:radial-gradient(circle at 50% 50%,rgba(254,44,85,0.12),transparent 60%)}
+  .divider{width:60px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink));margin:18px auto;border-radius:2px}
+  .divider-thin{width:40px;height:2px;background:var(--grayd);margin:14px auto}
+
+  .badge{
+    display:inline-block;
+    padding:6px 18px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+  .badge-cyan{background:rgba(37,244,238,0.15);color:var(--cyan);border:1px solid var(--cyan)}
+  .badge-pink{background:rgba(254,44,85,0.15);color:var(--pink);border:1px solid var(--pink)}
+  .badge-white{background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.3)}
+
+  .btn{
+    display:inline-block;
+    padding:14px 36px;
+    border-radius:30px;
+    font-weight:800;
+    font-size:15px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+    letter-spacing:0.5px;
+    transition:transform 0.2s;
+  }
+  .btn:active{transform:scale(0.96)}
+  .btn-cyan{background:var(--cyan);color:var(--black)}
+  .btn-pink{background:var(--pink);color:var(--white)}
+  .btn-outline{background:transparent;color:var(--white);border:2px solid var(--white)}
+  .btn-outline-cyan{background:transparent;color:var(--cyan);border:2px solid var(--cyan)}
+
+  h1{font-weight:900;font-size:34px;line-height:1.1;letter-spacing:-1px}
+  h2{font-weight:900;font-size:28px;line-height:1.15;letter-spacing:-0.5px}
+  h3{font-weight:800;font-size:20px;line-height:1.2}
+  p{font-size:14px;line-height:1.7;color:var(--graylt)}
+  .sub{font-size:13px;color:var(--gray);line-height:1.6}
+
+  /* --- GLITCH TEXT --- */
+  .glitch{position:relative;display:inline-block}
+  .glitch::before,.glitch::after{
+    content:attr(data-text);
+    position:absolute;
+    top:0;left:0;
+    width:100%;
+    opacity:0.7;
+  }
+  .glitch::before{color:var(--cyan);animation:glitch-1 3s infinite;clip-path:polygon(0 0,100% 0,100% 33%,0 33%)}
+  .glitch::after{color:var(--pink);animation:glitch-2 3s infinite;clip-path:polygon(0 67%,100% 67%,100% 100%,0 100%)}
+  @keyframes glitch-1{
+    0%,90%,100%{transform:translate(0,0)}
+    92%{transform:translate(-2px,-1px)}
+    94%{transform:translate(2px,1px)}
+    96%{transform:translate(-1px,1px)}
+  }
+  @keyframes glitch-2{
+    0%,90%,100%{transform:translate(0,0)}
+    92%{transform:translate(2px,1px)}
+    94%{transform:translate(-2px,-1px)}
+    96%{transform:translate(1px,-1px)}
+  }
+
+  /* --- LOGO --- */
+  .logo-svg{width:100%;max-width:340px;height:auto;display:block;margin:0 auto}
+  .logo-svg text{font-family:'Inter',sans-serif;font-weight:900}
+
+  /* --- SERVICE CARDS --- */
+  .svc-card{
+    background:var(--card);
+    border-radius:16px;
+    padding:24px 20px;
+    margin:12px 0;
+    text-align:left;
+    position:relative;
+    border:1px solid rgba(255,255,255,0.06);
+    transition:border-color 0.3s;
+  }
+  .svc-card:hover{border-color:rgba(37,244,238,0.3)}
+  .svc-num{
+    position:absolute;
+    top:-14px;
+    left:20px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    font-size:14px;
+    font-weight:900;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .svc-num.cyan{background:var(--cyan);color:var(--black)}
+  .svc-num.pink{background:var(--pink);color:var(--white)}
+  .svc-icon{font-size:28px;margin-bottom:8px;display:block}
+  .svc-card h3{font-size:16px;font-weight:800;margin-bottom:8px;color:var(--white)}
+  .svc-card p{font-size:12.5px;color:var(--gray);line-height:1.6}
+  .svc-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+  .svc-tag{font-size:10px;padding:3px 10px;border-radius:10px;background:rgba(37,244,238,0.1);color:var(--cyan);font-weight:600}
+  .svc-tag.pink{background:rgba(254,44,85,0.1);color:var(--pink)}
+
+  /* --- TIER CARDS --- */
+  .tier{
+    border-radius:18px;
+    padding:28px 22px;
+    margin:16px 0;
+    text-align:left;
+    position:relative;
+  }
+  .tier-starter{background:linear-gradient(135deg,#1a1a1a,#222);border:1px solid rgba(255,255,255,0.08)}
+  .tier-growth{background:linear-gradient(135deg,#1a1820,#1e1a28);border:1px solid rgba(37,244,238,0.25)}
+  .tier-scale{background:linear-gradient(135deg,#201418,#281a20);border:1px solid rgba(254,44,85,0.25)}
+  .tier-badge{
+    position:absolute;
+    top:-12px;
+    right:20px;
+    padding:4px 14px;
+    border-radius:12px;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .tier-badge.cyan{background:var(--cyan);color:var(--black)}
+  .tier-badge.pink{background:var(--pink);color:var(--white)}
+  .tier-badge.gray{background:var(--grayd);color:var(--white)}
+  .tier h3{font-size:22px;font-weight:900;margin-bottom:4px}
+  .tier .tier-sub{font-size:12px;color:var(--gray);margin-bottom:16px}
+  .tier ul{list-style:none;padding:0}
+  .tier li{font-size:13px;padding:6px 0;color:var(--graylt);display:flex;align-items:flex-start;gap:8px;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .tier li:last-child{border-bottom:none}
+  .tier li .check{flex-shrink:0;width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;margin-top:1px}
+  .check.cyan{background:var(--cyan);color:var(--black)}
+  .check.pink{background:var(--pink);color:var(--white)}
+  .check.gray{background:var(--grayd);color:var(--white)}
+
+  /* --- STEPS --- */
+  .step-num{
+    width:44px;height:44px;
+    border-radius:50%;
+    font-size:18px;font-weight:900;
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .step-num.cyan{background:var(--cyan);color:var(--black)}
+  .step-num.pink{background:var(--pink);color:var(--white)}
+  .step-row{display:flex;align-items:flex-start;gap:16px;text-align:left;padding:14px 0}
+
+  /* --- STAT GRID --- */
+  .stat-box{
+    background:var(--card);
+    border-radius:14px;
+    padding:20px 14px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .stat-num{font-size:32px;font-weight:900;line-height:1;margin-bottom:4px}
+  .stat-num.cyan{color:var(--cyan)}
+  .stat-num.pink{color:var(--pink)}
+  .stat-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px}
+
+  /* --- ADD-ON CARD --- */
+  .addon-card{
+    border-radius:14px;
+    padding:20px;
+    margin:10px 0;
+    text-align:left;
+    border:1px solid;
+  }
+  .addon-card h3{font-size:15px;font-weight:800;margin-bottom:6px}
+  .addon-card p{font-size:12px}
+
+  /* --- ANIMATIONS --- */
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(37,244,238,0.3)}50%{box-shadow:0 0 40px rgba(37,244,238,0.5)}}
+  @keyframes scroll-hint{0%{transform:translateY(0);opacity:1}100%{transform:translateY(12px);opacity:0}}
+  .float-anim{animation:float 3s ease-in-out infinite}
+  .pulse-cyan{animation:pulse-glow 2.5s ease-in-out infinite}
+
+  /* --- INFO BAR --- */
+  .info-bar{
+    display:flex;
+    justify-content:center;
+    gap:24px;
+    padding:14px 24px;
+    background:var(--darker);
+    font-size:12px;
+    font-weight:600;
+    color:var(--graylt);
+    border-top:1px solid rgba(255,255,255,0.06);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .info-bar span{display:flex;align-items:center;gap:6px}
+
+  /* --- FOOTER --- */
+  .footer-section{padding:40px 24px 30px;text-align:center;background:var(--darker);border-top:1px solid rgba(255,255,255,0.06)}
+  .social-row{display:flex;justify-content:center;gap:16px;margin:16px 0}
+  .social-btn{
+    width:40px;height:40px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card);
+    border:1px solid rgba(255,255,255,0.1);
+    font-size:18px;
+  }
+
+  /* --- SCROLL HINT --- */
+  .scroll-hint{
+    width:24px;height:40px;
+    border:2px solid rgba(255,255,255,0.3);
+    border-radius:12px;
+    margin:24px auto 0;
+    position:relative;
+  }
+  .scroll-hint::after{
+    content:'';
+    position:absolute;
+    top:6px;left:50%;
+    transform:translateX(-50%);
+    width:4px;height:8px;
+    border-radius:2px;
+    background:var(--cyan);
+    animation:scroll-hint 1.5s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== 1. HERO ==================== -->
+<div class="section glow-cyan" style="background:var(--black);padding:48px 24px 36px;">
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 20%,rgba(254,44,85,0.08),transparent 60%);pointer-events:none;"></div>
+  <div style="position:relative;z-index:1;">
+    <!-- Inline SVG Logo -->
+    <svg viewBox="0 0 1200 400" class="logo-svg float-anim" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cyan glitch offset -->
+      <text x="58" y="270" font-size="240" font-weight="900" fill="#25F4EE" opacity="0.35" letter-spacing="-12">TOK</text>
+      <!-- Pink glitch offset -->
+      <text x="72" y="284" font-size="240" font-weight="900" fill="#FE2C55" opacity="0.35" letter-spacing="-12">TOK</text>
+      <!-- Main white TOK with pink stroke -->
+      <text x="65" y="277" font-size="240" font-weight="900" fill="#FFFFFF" stroke="#FE2C55" stroke-width="3" letter-spacing="-12">TOK</text>
+      <!-- crew -->
+      <text x="620" y="277" font-size="140" font-weight="700" font-style="italic" fill="#25F4EE" letter-spacing="-2">crew</text>
+      <!-- Slash accent -->
+      <line x1="600" y1="140" x2="610" y2="290" stroke="#FE2C55" stroke-width="5" stroke-linecap="round"/>
+      <line x1="606" y1="140" x2="616" y2="290" stroke="#25F4EE" stroke-width="3" stroke-linecap="round"/>
+      <!-- Sparkle dots -->
+      <circle cx="540" cy="100" r="6" fill="#25F4EE"/>
+      <circle cx="560" cy="80" r="4" fill="#FE2C55"/>
+      <circle cx="900" cy="310" r="5" fill="#FE2C55"/>
+      <circle cx="920" cy="325" r="3" fill="#25F4EE"/>
+    </svg>
+
+    <div style="margin-top:20px;">
+      <span class="badge badge-cyan">TikTok Business Operations Partner</span>
+    </div>
+    <h1 style="margin-top:18px;font-size:28px;">
+      We Handle<br>
+      <span style="background:linear-gradient(90deg,var(--cyan),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Every Comment,</span><br>
+      <span style="background:linear-gradient(90deg,var(--pink),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Every DM,</span><br>
+      Every Sale.
+    </h1>
+    <div class="divider"></div>
+    <p style="max-width:340px;margin:0 auto;font-size:14px;">
+      You focus on creating. We handle what happens after the views land — turning attention into relationships and relationships into revenue.
+    </p>
+    <div style="margin-top:28px;">
+      <a href="#contact" class="btn btn-cyan pulse-cyan">LET'S TALK</a>
+    </div>
+    <div class="scroll-hint"></div>
+  </div>
+</div>
+
+<!-- ==================== 2. INFO BAR ==================== -->
+<div class="info-bar">
+  <span>📱 TikTok @TOKcrew</span>
+  <span>✉️ hello@tokcrew.my</span>
+</div>
+
+<!-- ==================== 3. WHO WE ARE ==================== -->
+<div class="section" style="background:var(--dark);">
+  <span class="badge badge-pink">Not Your Average Agency</span>
+  <h2 style="margin-top:16px;">We're Not a<br>Marketing Agency.</h2>
+  <div class="divider"></div>
+  <p style="max-width:360px;margin:0 auto;">
+    Marketing agencies get you <strong style="color:var(--cyan);">attention</strong>.<br>
+    We handle what happens <strong style="color:var(--pink);">after</strong> the attention lands.
+  </p>
+  <div style="margin-top:24px;background:var(--card);border-radius:16px;padding:24px;text-align:left;border:1px solid rgba(37,244,238,0.15);">
+    <p style="font-size:14px;color:var(--graylt);line-height:1.8;">
+      Every comment, every DM, every live chat message — that's our territory. We run the <strong style="color:var(--cyan);">customer operations</strong> side of your TikTok using smart automation and AI, with a human safety net for anything that needs a personal touch.
+    </p>
+    <p style="font-size:13px;color:var(--gray);margin-top:12px;font-style:italic;">
+      Think of us as outsourced customer operations for TikTok — not social media management.
+    </p>
+  </div>
+</div>
+
+<!-- ==================== 4. STATS (from video) ==================== -->
+<div class="section glow-pink" style="background:var(--black);">
+  <span class="badge badge-cyan">The Numbers Don't Lie</span>
+  <h2 style="margin-top:14px;">Why Community<br>Engagement Matters</h2>
+  <div class="divider"></div>
+  <p style="max-width:340px;margin:0 auto 24px;">
+    Here's what happens when you actually <em>talk</em> to your audience:
+  </p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:380px;margin:0 auto;">
+    <div class="stat-box">
+      <div class="stat-num cyan">66%</div>
+      <div class="stat-label">Better Customer Retention</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num pink">68%</div>
+      <div class="stat-label">More New Leads</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num cyan">55%</div>
+      <div class="stat-label">Increase in Sales</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num pink">+19%</div>
+      <div class="stat-label">Higher Customer Spend</div>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--gray);margin-top:16px;font-style:italic;">
+    Source: Cello Courses Online community engagement study
+  </p>
+</div>
+
+<!-- ==================== 5. THE PROMISE ==================== -->
+<div class="section" style="background:var(--dark);">
+  <div style="font-size:36px;margin-bottom:12px;">🤝</div>
+  <h2 style="font-size:24px;">Our Promise to You</h2>
+  <div class="divider"></div>
+  <p style="max-width:360px;margin:0 auto 20px;">
+    <strong style="color:var(--cyan);">"People come for the content and stay for the community."</strong>
+    <br><br>
+    We make sure they stay — and buy.
+  </p>
+  <div style="background:var(--card);border-radius:14px;padding:20px;max-width:380px;margin:0 auto;border:1px solid rgba(254,44,85,0.15);text-align:left;">
+    <p style="font-size:13px;color:var(--graylt);line-height:1.8;">
+      ✅ Every comment gets a reply — fast, on-brand, and human<br>
+      ✅ Every DM gets answered — even at 2AM<br>
+      ✅ Every LIVE session stays moderated — no chaos, just conversions<br>
+      ✅ Every lead gets captured — nothing slips through<br>
+      ✅ Every complaint gets caught — before it becomes a PR problem
+    </p>
+  </div>
+</div>
+
+<!-- ==================== 6. CORE SERVICES ==================== -->
+<div class="section" style="background:var(--black);">
+  <span class="badge badge-cyan">Core Package</span>
+  <h2 style="margin-top:14px;">Conversion &<br>Conversation Management</h2>
+  <div class="divider"></div>
+  <p style="max-width:360px;margin:0 auto 8px;">
+    The foundation: always-on response handling across comments and DMs, built to turn attention into sales.
+  </p>
+  <p style="font-size:12px;color:var(--gray);">7 services included in every Core package ↓</p>
+
+  <!-- Service 1 -->
+  <div class="svc-card" style="margin-top:24px;">
+    <div class="svc-num cyan">1</div>
+    <span class="svc-icon">💬</span>
+    <h3>Comment Section Management</h3>
+    <p>Timely, on-brand replies to every single comment. We keep your comment section alive, engaging, and spam-free — so viewers feel seen and heard.</p>
+    <div class="svc-tags">
+      <span class="svc-tag">Reply to all comments</span>
+      <span class="svc-tag">Spam & troll filtering</span>
+    </div>
+  </div>
+
+  <!-- Service 2 -->
+  <div class="svc-card">
+    <div class="svc-num pink">2</div>
+    <span class="svc-icon">🤖</span>
+    <h3>DM Chatbot Automation (FAQ)</h3>
+    <p>Smart auto-replies for the questions everyone asks — pricing, shipping, availability. Always-on coverage, even outside business hours.</p>
+    <div class="svc-tags">
+      <span class="svc-tag pink">24/7 coverage</span>
+      <span class="svc-tag pink">Auto FAQ replies</span>
+    </div>
+  </div>
+
+  <!-- Service 3 -->
+  <div class="svc-card">
+    <div class="svc-num cyan">3</div>
+    <span class="svc-icon">🧠</span>
+    <h3>DM Human Takeover (AI-Assisted)</h3>
+    <p>When a conversation gets complex or high-intent, AI flags it for human handling. Seamless handoff with full context — no "can you repeat that?" moments.</p>
+    <div class="svc-tags">
+      <span class="svc-tag">Smart ticketing</span>
+      <span class="svc-tag">Full context handoff</span>
+    </div>
+  </div>
+
+  <!-- Service 4 -->
+  <div class="svc-card">
+    <div class="svc-num pink">4</div>
+    <span class="svc-icon">🛒</span>
+    <h3>TikTok Shop Comment-to-Purchase</h3>
+    <p>Product-tagged comment responses that drive viewers straight to checkout. Affiliate and creator comment engagement support included.</p>
+    <div class="svc-tags">
+      <span class="svc-tag pink">Comment → checkout</span>
+      <span class="svc-tag pink">Affiliate support</span>
+    </div>
+  </div>
+
+  <!-- Service 5 -->
+  <div class="svc-card">
+    <div class="svc-num cyan">5</div>
+    <span class="svc-icon">🔴</span>
+    <h3>Live Selling Support</h3>
+    <p>Real-time comment monitoring during your LIVE sessions. Moderator bots handle high-volume chat. Automated "buy now" and restock prompts timed to the live.</p>
+    <div class="svc-tags">
+      <span class="svc-tag">Live moderation</span>
+      <span class="svc-tag">Auto buy-now prompts</span>
+    </div>
+  </div>
+
+  <!-- Service 6 -->
+  <div class="svc-card">
+    <div class="svc-num pink">6</div>
+    <span class="svc-icon">📊</span>
+    <h3>Lead Qualification & CRM Handoff</h3>
+    <p>Hot / warm / cold lead scoring from DM conversations. Auto-push to your CRM, Google Sheet, or Excel tracker. Funnel routing to landing pages where it applies.</p>
+    <div class="svc-tags">
+      <span class="svc-tag pink">Lead scoring</span>
+      <span class="svc-tag pink">CRM integration</span>
+    </div>
+  </div>
+
+  <!-- Service 7 -->
+  <div class="svc-card">
+    <div class="svc-num cyan">7</div>
+    <span class="svc-icon">🚨</span>
+    <h3>Sentiment & Complaint Monitoring</h3>
+    <p>Early flagging of negative sentiment spikes or PR risks. Daily and weekly complaint summaries so issues get caught before they escalate.</p>
+    <div class="svc-tags">
+      <span class="svc-tag">PR risk detection</span>
+      <span class="svc-tag">Complaint summaries</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 7. ADD-ONS ==================== -->
+<div class="section" style="background:var(--dark);">
+  <span class="badge badge-pink">Optional Add-Ons</span>
+  <h2 style="margin-top:14px;">Level Up When<br>You're Ready</h2>
+  <div class="divider"></div>
+  <p style="max-width:360px;margin:0 auto 20px;">Scale your package as you grow. These bolt onto any Core plan.</p>
+
+  <div class="addon-card" style="border-color:rgba(37,244,238,0.2);background:rgba(37,244,238,0.05);">
+    <h3 style="color:var(--cyan);">📦 Content Support</h3>
+    <p>Content calendar planning & scheduled posting automation. Basic editing & repurposing — long-form to TikTok clips, cross-platform resizing. Convenience, not a creative agency replacement.</p>
+  </div>
+
+  <div class="addon-card" style="border-color:rgba(254,44,85,0.2);background:rgba(254,44,85,0.05);">
+    <h3 style="color:var(--pink);">📈 Performance & Ads</h3>
+    <p>Weekly performance dashboard — engagement, response time, DM-to-sale conversion. TikTok Ads / Spark Ads management — boosting proven organic content for maximum ROI.</p>
+  </div>
+
+  <div class="addon-card" style="border-color:rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);">
+    <h3 style="color:var(--white);">⚙️ One-Time Setup Fee</h3>
+    <p>Covers the upfront engineering: chatbot configuration, CRM/dashboard integration, live-selling bot setup. Charged once per client — protects the value of the technical build-out.</p>
+  </div>
+</div>
+
+<!-- ==================== 8. PRICING TIERS ==================== -->
+<div class="section" style="background:var(--black);">
+  <span class="badge badge-cyan">Pick Your Tier</span>
+  <h2 style="margin-top:14px;">Choose Your<br>Crew</h2>
+  <div class="divider"></div>
+  <p style="max-width:360px;margin:0 auto 8px;">Start where you are. Upgrade anytime. No lock-in.</p>
+  <p style="font-size:11px;color:var(--gray);margin-bottom:20px;">Pricing customized per client — book a consult for a quote.</p>
+
+  <!-- Starter -->
+  <div class="tier tier-starter">
+    <span class="tier-badge gray">Entry</span>
+    <h3>Starter</h3>
+    <div class="tier-sub">New / small TikTok accounts just getting started</div>
+    <ul>
+      <li><span class="check gray">✓</span> Comment management</li>
+      <li><span class="check gray">✓</span> DM FAQ bot</li>
+      <li><span class="check gray">✓</span> Human takeover ticketing</li>
+    </ul>
+  </div>
+
+  <!-- Growth -->
+  <div class="tier tier-growth">
+    <span class="tier-badge cyan">Popular</span>
+    <h3 style="color:var(--cyan);">Growth</h3>
+    <div class="tier-sub">Active TikTok Shop sellers ready to convert</div>
+    <ul>
+      <li><span class="check cyan">✓</span> Everything in Starter</li>
+      <li><span class="check cyan">✓</span> Comment-to-purchase funnel</li>
+      <li><span class="check cyan">✓</span> Lead qualification + CRM handoff</li>
+      <li><span class="check cyan">✓</span> Sentiment monitoring</li>
+    </ul>
+  </div>
+
+  <!-- Scale -->
+  <div class="tier tier-scale">
+    <span class="tier-badge pink">Max</span>
+    <h3 style="color:var(--pink);">Scale</h3>
+    <div class="tier-sub">Live-selling / ads-ready brands going big</div>
+    <ul>
+      <li><span class="check pink">✓</span> Everything in Growth</li>
+      <li><span class="check pink">✓</span> Live selling support</li>
+      <li><span class="check pink">✓</span> Content add-on</li>
+      <li><span class="check pink">✓</span> Marketing add-on (dashboard + ads)</li>
+    </ul>
+  </div>
+
+  <div style="margin-top:24px;">
+    <a href="#contact" class="btn btn-outline-cyan">GET A QUOTE</a>
+  </div>
+</div>
+
+<!-- ==================== 9. HOW IT WORKS ==================== -->
+<div class="section" style="background:var(--dark);">
+  <span class="badge badge-white">Simple Process</span>
+  <h2 style="margin-top:14px;">Very Easy!<br>Just <span style="color:var(--cyan);">4</span> Steps</h2>
+  <div class="divider"></div>
+
+  <div style="max-width:380px;margin:0 auto;padding-top:12px;">
+    <div class="step-row">
+      <span class="step-num cyan">1</span>
+      <div>
+        <p style="font-weight:800;font-size:15px;color:var(--white);">Book a Discovery Call</p>
+        <p style="font-size:12px;">Tell us about your TikTok, your goals, and your pain points. We listen first.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <span class="step-num pink">2</span>
+      <div>
+        <p style="font-weight:800;font-size:15px;color:var(--white);">We Build Your Stack</p>
+        <p style="font-size:12px;">Chatbot config, CRM integration, live-selling setup — all the engineering, done for you.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <span class="step-num cyan">3</span>
+      <div>
+        <p style="font-weight:800;font-size:15px;color:var(--white);">We Go Live</p>
+        <p style="font-size:12px;">Comments, DMs, live chat — we take over the conversation layer. You keep creating.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <span class="step-num pink">4</span>
+      <div>
+        <p style="font-weight:800;font-size:15px;color:var(--white);">You Watch Sales Grow</p>
+        <p style="font-size:12px;">Weekly reports. Real numbers. More conversions, less chaos. That's it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 10. ROI CALCULATOR ==================== -->
+<div class="section glow-cyan" style="background:var(--black);">
+  <h2 style="font-size:24px;">Still Thinking?</h2>
+  <div style="font-size:36px;margin:10px 0;">🤔</div>
+  <div class="divider"></div>
+
+  <div style="background:var(--card);border-radius:18px;padding:24px 20px;max-width:380px;margin:20px auto 0;border:1px solid rgba(37,244,238,0.2);">
+    <p style="font-size:12px;color:var(--gray);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">The Math</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;margin-bottom:16px;">
+      <div>
+        <div class="stat-num cyan" style="font-size:26px;">10K</div>
+        <div class="stat-label">Views</div>
+      </div>
+      <div>
+        <div class="stat-num pink" style="font-size:26px;">2%</div>
+        <div class="stat-label">Convert</div>
+      </div>
+      <div>
+        <div class="stat-num cyan" style="font-size:26px;">RM10</div>
+        <div class="stat-label">Spend</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(90deg,var(--cyan),var(--pink));border-radius:12px;padding:14px 18px;">
+      <p style="font-weight:900;font-size:18px;color:var(--black);margin:0;">= RM2,000 Sales Increase 🚀</p>
+    </div>
+
+    <p style="font-size:11px;color:var(--gray);margin-top:14px;text-align:center;">
+      That's just from 10K views with a 2% conversion rate. Imagine what happens when we optimize your DM-to-sale funnel and keep your community engaged 24/7.
+    </p>
+  </div>
+
+  <div style="margin-top:24px;">
+    <a href="#contact" class="btn btn-cyan">GET STARTED</a>
+  </div>
+</div>
+
+<!-- ==================== 11. WHY TOKCREW ==================== -->
+<div class="section" style="background:var(--dark);">
+  <span class="badge badge-pink">Why TOKcrew</span>
+  <h2 style="margin-top:14px;">We're Different<br>(In a Good Way)</h2>
+  <div class="divider"></div>
+
+  <div style="max-width:380px;margin:0 auto;">
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);text-align:left;">
+      <span style="font-size:28px;flex-shrink:0;">⚡</span>
+      <div>
+        <h3 style="font-size:15px;color:var(--cyan);margin-bottom:4px;">Lightning Fast Setup</h3>
+        <p style="font-size:12px;">Most clients go live within a week. We handle 100% of the technical setup — no dev team needed on your side.</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);text-align:left;">
+      <span style="font-size:28px;flex-shrink:0;">🛡️</span>
+      <div>
+        <h3 style="font-size:15px;color:var(--pink);margin-bottom:4px;">Human Safety Net</h3>
+        <p style="font-size:12px;">AI does the heavy lifting, but humans handle the sensitive stuff. Every complex conversation gets a real person — with full context.</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);text-align:left;">
+      <span style="font-size:28px;flex-shrink:0;">📊</span>
+      <div>
+        <h3 style="font-size:15px;color:var(--cyan);margin-bottom:4px;">Real Numbers, Not Vanity</h3>
+        <p style="font-size:12px;">We don't sell "impressions." We track response time, DM-to-sale conversion, and revenue impact — weekly, so you always know your ROI.</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;text-align:left;">
+      <span style="font-size:28px;flex-shrink:0;">🎯</span>
+      <div>
+        <h3 style="font-size:15px;color:var(--pink);margin-bottom:4px;">Built for TikTok Shop</h3>
+        <p style="font-size:12px;">Not a generic chatbot tool. We're built specifically for TikTok — comments, DMs, LIVE sessions, Shop funnels, affiliate engagement. All in one.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 12. CTA ==================== -->
+<div class="section glow-pink" id="contact" style="background:var(--black);">
+  <div style="font-size:36px;margin-bottom:12px;">🚀</div>
+  <h2 style="font-size:26px;">Let's Get Your<br>Conversations<br>Converting!</h2>
+  <div class="divider"></div>
+  <p style="max-width:340px;margin:0 auto 8px;">
+    Stop leaving money in your comment section. Let's turn those views into revenue.
+  </p>
+  <p style="font-size:12px;color:var(--gray);margin-bottom:24px;">Limited onboardings per month — we keep it tight to deliver quality.</p>
+
+  <div style="margin-top:8px;">
+    <a href="#" class="btn btn-pink" style="font-size:16px;padding:16px 40px;">BOOK A DISCOVERY CALL</a>
+  </div>
+  <div style="margin-top:16px;">
+    <a href="#" class="btn btn-outline" style="font-size:14px;">WhatsApp Us</a>
+  </div>
+
+  <div style="margin-top:32px;font-size:32px;">
+    👉 👉 👉
+  </div>
+</div>
+
+<!-- ==================== 13. FOOTER ==================== -->
+<div class="footer-section">
+  <!-- Mini logo -->
+  <svg viewBox="0 0 1200 400" style="width:180px;height:auto;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+    <text x="58" y="270" font-size="240" font-weight="900" fill="#25F4EE" opacity="0.3" letter-spacing="-12">TOK</text>
+    <text x="72" y="284" font-size="240" font-weight="900" fill="#FE2C55" opacity="0.3" letter-spacing="-12">TOK</text>
+    <text x="65" y="277" font-size="240" font-weight="900" fill="#FFFFFF" stroke="#FE2C55" stroke-width="3" letter-spacing="-12">TOK</text>
+    <text x="620" y="277" font-size="140" font-weight="700" font-style="italic" fill="#25F4EE" letter-spacing="-2">crew</text>
+  </svg>
+
+  <p style="font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gray);text-transform:uppercase;margin-top:12px;">
+    Your Conversations, Converted.
+  </p>
+
+  <div style="width:80%;height:2px;background:linear-gradient(90deg,transparent,var(--grayd),transparent);margin:16px auto;"></div>
+
+  <div class="social-row">
+    <div class="social-btn">🎵</div>
+    <div class="social-btn">📸</div>
+    <div class="social-btn">💬</div>
+    <div class="social-btn">📧</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:4px;margin-top:12px;">
+    <p style="font-size:12px;color:var(--graylt);">📱 TikTok: @TOKcrew</p>
+    <p style="font-size:12px;color:var(--graylt);">✉️ hello@tokcrew.my</p>
+    <p style="font-size:12px;color:var(--graylt);">💬 WhatsApp: +6017-8033103</p>
+  </div>
+
+  <p style="font-size:10px;color:var(--grayd);margin-top:20px;">
+    © 2025 TOKcrew. All rights reserved.<br>
+    Built different. Built for TikTok.
+  </p>
+</div>
+
+</body>
+</html>
